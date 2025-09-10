@@ -60,13 +60,11 @@ const mainProcess = async (
       )
       .on("end", async () => {
         console.log(`Process of ${res.resolution} Done`);
-        fs.unlinkSync(`${outputSubFolderPath}/playlist.m3u8`);
-
         // Create playlist.m3u8
         await creatingPlaylistFile(outputSubFolderPath);
-
         // Upload on S3
         await uploadSegmentsToS3(outputSubFolderPath, workspace).catch(reject);
+        resolve(1);
       })
       .on("error", reject)
       .output(path.resolve(`${outputSubFolderPath}/playlist.m3u8`))
@@ -108,8 +106,9 @@ const init = async () => {
     }
   }
 
-  // Removing Downloaded video
-  fs.unlinkSync(inputVideoPath);
+  // Removing Downloaded video & Output video
+  // fs.unlinkSync(outputFolderPath);
+  // fs.unlinkSync(inputVideoPath);
 };
 
 init()

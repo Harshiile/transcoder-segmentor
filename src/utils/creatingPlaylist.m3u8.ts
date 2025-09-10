@@ -27,8 +27,8 @@ export const creatingPlaylistFile = async (outputSubFolderPath: string) => {
     }
   }
 
-  // fs.writeFileSync(
-  //   `${outputSubFolderPath}/playlist.m3u8`,
-  //   newContent.join("\n")
-  // );
+  fs.writeFileSync(
+    `${outputSubFolderPath}/playlist.m3u8`,
+    newContent.join("\n")
+  );
 };
